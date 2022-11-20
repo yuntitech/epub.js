@@ -4348,18 +4348,18 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
 function replaceBase(doc, section) {
   var base;
   var head;
-  var url = section.url;
-  var absolute = url.indexOf("://") > -1;
+  var url = section.baseUrl + section.url;
+  var absolute = url.indexOf('://') > -1;
 
   if (!doc) {
     return;
   }
 
-  head = Object(_core__WEBPACK_IMPORTED_MODULE_5__["qs"])(doc, "head");
-  base = Object(_core__WEBPACK_IMPORTED_MODULE_5__["qs"])(head, "base");
+  head = Object(_core__WEBPACK_IMPORTED_MODULE_5__["qs"])(doc, 'head');
+  base = Object(_core__WEBPACK_IMPORTED_MODULE_5__["qs"])(head, 'base');
 
   if (!base) {
-    base = doc.createElement("base");
+    base = doc.createElement('base');
     head.insertBefore(base, head.firstChild);
   } // Fix for Safari crashing if the url doesn't have an origin
 
@@ -4368,7 +4368,7 @@ function replaceBase(doc, section) {
     url = window.location.origin + url;
   }
 
-  base.setAttribute("href", url);
+  base.setAttribute('href', url);
 }
 function replaceCanonical(doc, section) {
   var head;
@@ -4379,15 +4379,15 @@ function replaceCanonical(doc, section) {
     return;
   }
 
-  head = Object(_core__WEBPACK_IMPORTED_MODULE_5__["qs"])(doc, "head");
+  head = Object(_core__WEBPACK_IMPORTED_MODULE_5__["qs"])(doc, 'head');
   link = Object(_core__WEBPACK_IMPORTED_MODULE_5__["qs"])(head, "link[rel='canonical']");
 
   if (link) {
-    link.setAttribute("href", url);
+    link.setAttribute('href', url);
   } else {
-    link = doc.createElement("link");
-    link.setAttribute("rel", "canonical");
-    link.setAttribute("href", url);
+    link = doc.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    link.setAttribute('href', url);
     head.appendChild(link);
   }
 }
@@ -4400,40 +4400,40 @@ function replaceMeta(doc, section) {
     return;
   }
 
-  head = Object(_core__WEBPACK_IMPORTED_MODULE_5__["qs"])(doc, "head");
+  head = Object(_core__WEBPACK_IMPORTED_MODULE_5__["qs"])(doc, 'head');
   meta = Object(_core__WEBPACK_IMPORTED_MODULE_5__["qs"])(head, "link[property='dc.identifier']");
 
   if (meta) {
-    meta.setAttribute("content", id);
+    meta.setAttribute('content', id);
   } else {
-    meta = doc.createElement("meta");
-    meta.setAttribute("name", "dc.identifier");
-    meta.setAttribute("content", id);
+    meta = doc.createElement('meta');
+    meta.setAttribute('name', 'dc.identifier');
+    meta.setAttribute('content', id);
     head.appendChild(meta);
   }
 } // TODO: move me to Contents
 
 function replaceLinks(contents, fn) {
-  var links = contents.querySelectorAll("a[href]");
+  var links = contents.querySelectorAll('a[href]');
 
   if (!links.length) {
     return;
   }
 
-  var base = Object(_core__WEBPACK_IMPORTED_MODULE_5__["qs"])(contents.ownerDocument, "base");
-  var location = base ? base.getAttribute("href") : undefined;
+  var base = Object(_core__WEBPACK_IMPORTED_MODULE_5__["qs"])(contents.ownerDocument, 'base');
+  var location = base ? base.getAttribute('href') : undefined;
 
   var replaceLink = function (link) {
-    var href = link.getAttribute("href");
+    var href = link.getAttribute('href');
 
-    if (href.indexOf("mailto:") === 0) {
+    if (href.indexOf('mailto:') === 0) {
       return;
     }
 
-    var absolute = href.indexOf("://") > -1;
+    var absolute = href.indexOf('://') > -1;
 
     if (absolute) {
-      link.setAttribute("target", "_blank");
+      link.setAttribute('target', '_blank');
     } else {
       var linkUrl;
 
@@ -4446,7 +4446,8 @@ function replaceLinks(contents, fn) {
         if (linkUrl && linkUrl.hash) {
           fn(linkUrl.Path.path + linkUrl.hash);
         } else if (linkUrl) {
-          fn(linkUrl.Path.path);
+          // fn(linkUrl.Path.path);
+          fn(linkUrl.href);
         } else {
           fn(href);
         }
@@ -4465,8 +4466,8 @@ function substitute(content, urls, replacements) {
     if (url && replacements[i]) {
       // Account for special characters in the file name.
       // See https://stackoverflow.com/a/6318729.
-      url = url.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-      content = content.replace(new RegExp(url, "g"), replacements[i]);
+      url = url.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+      content = content.replace(new RegExp(url, 'g'), replacements[i]);
     }
   });
   return content;
@@ -7565,7 +7566,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
   function DefaultViewManager(options) {
     default_classCallCheck(this, DefaultViewManager);
 
-    this.name = "default";
+    this.name = 'default';
     this.optsSettings = options.settings;
     this.View = options.view;
     this.request = options.request;
@@ -7578,11 +7579,12 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
       height: undefined,
       axis: undefined,
       writingMode: undefined,
-      flow: "scrolled",
-      ignoreClass: "",
+      flow: 'scrolled',
+      ignoreClass: '',
       fullsize: undefined,
       allowScriptedContent: false,
-      allowPopups: false
+      allowPopups: false,
+      baseUrl: undefined
     });
     Object(core["extend"])(this.settings, options.settings || {});
     this.viewSettings = {
@@ -7606,12 +7608,12 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
     value: function render(element, size) {
       var tag = element.tagName;
 
-      if (typeof this.settings.fullsize === "undefined" && tag && (tag.toLowerCase() == "body" || tag.toLowerCase() == "html")) {
+      if (typeof this.settings.fullsize === 'undefined' && tag && (tag.toLowerCase() == 'body' || tag.toLowerCase() == 'html')) {
         this.settings.fullsize = true;
       }
 
       if (this.settings.fullsize) {
-        this.settings.overflow = "visible";
+        this.settings.overflow = 'visible';
         this.overflow = this.settings.overflow;
       }
 
@@ -7656,7 +7658,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
     key: "addEventListeners",
     value: function addEventListeners() {
       var scroller;
-      window.addEventListener("unload", function (e) {
+      window.addEventListener('unload', function (e) {
         this.destroy();
       }.bind(this));
 
@@ -7667,7 +7669,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
       }
 
       this._onScroll = this.onScroll.bind(this);
-      scroller.addEventListener("scroll", this._onScroll);
+      scroller.addEventListener('scroll', this._onScroll);
     }
   }, {
     key: "removeEventListeners",
@@ -7680,7 +7682,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
         scroller = window;
       }
 
-      scroller.removeEventListener("scroll", this._onScroll);
+      scroller.removeEventListener('scroll', this._onScroll);
       this._onScroll = undefined;
     }
   }, {
@@ -7694,12 +7696,12 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
       this.stage.destroy();
       this.rendered = false;
       /*
-      		clearTimeout(this.trimTimeout);
-      	if(this.settings.hidden) {
-      		this.element.removeChild(this.wrapper);
-      	} else {
-      		this.element.removeChild(this.container);
-      	}
+      clearTimeout(this.trimTimeout);
+      if(this.settings.hidden) {
+      this.element.removeChild(this.wrapper);
+      } else {
+      this.element.removeChild(this.container);
+      }
       */
     }
   }, {
@@ -7777,7 +7779,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
     value: function handleNextPrePaginated(forceRight, section, action) {
       var next;
 
-      if (this.layout.name === "pre-paginated" && this.layout.divisor > 1) {
+      if (this.layout.name === 'pre-paginated' && this.layout.divisor > 1) {
         if (forceRight || section.index === 0) {
           // First page (cover) should stand alone for pre-paginated books
           return;
@@ -7785,7 +7787,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
 
         next = section.next();
 
-        if (next && !next.properties.includes("page-spread-left")) {
+        if (next && !next.properties.includes('page-spread-left')) {
           return action.call(this, next);
         }
       }
@@ -7803,10 +7805,10 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
 
       var visible = this.views.find(section); // View is already shown, just move to correct location in view
 
-      if (visible && section && this.layout.name !== "pre-paginated") {
+      if (visible && section && this.layout.name !== 'pre-paginated') {
         var offset = visible.offset();
 
-        if (this.settings.direction === "ltr") {
+        if (this.settings.direction === 'ltr') {
           this.scrollTo(offset.left, offset.top, true);
         } else {
           var width = visible.width();
@@ -7829,7 +7831,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
       this.clear();
       var forceRight = false;
 
-      if (this.layout.name === "pre-paginated" && this.layout.divisor === 2 && section.properties.includes("page-spread-right")) {
+      if (this.layout.name === 'pre-paginated' && this.layout.divisor === 2 && section.properties.includes('page-spread-right')) {
         forceRight = true;
       }
 
@@ -7892,9 +7894,9 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
 
       if (this.settings.direction === 'rtl') {
         /***
-        	the `floor` function above (L343) is on positive values, so we should add one `layout.delta`
-        	to distX or use `Math.ceil` function, or multiply offset.left by -1
-        	before `Math.floor`
+        the `floor` function above (L343) is on positive values, so we should add one `layout.delta`
+        to distX or use `Math.ceil` function, or multiply offset.left by -1
+        before `Math.floor`
         */
         distX = distX + this.layout.delta;
         distX = distX - width;
@@ -7960,7 +7962,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
   }, {
     key: "counter",
     value: function counter(bounds) {
-      if (this.settings.axis === "vertical") {
+      if (this.settings.axis === 'vertical') {
         this.scrollBy(0, bounds.heightDelta, true);
       } else {
         this.scrollBy(bounds.widthDelta, 0, true);
@@ -7983,7 +7985,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
       var dir = this.settings.direction;
       if (!this.views.length) return;
 
-      if (this.isPaginated && this.settings.axis === "horizontal" && (!dir || dir === "ltr")) {
+      if (this.isPaginated && this.settings.axis === 'horizontal' && (!dir || dir === 'ltr')) {
         this.scrollLeft = this.container.scrollLeft;
         left = this.container.scrollLeft + this.container.offsetWidth + this.layout.delta;
 
@@ -7992,10 +7994,10 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
         } else {
           next = this.views.last().section.next();
         }
-      } else if (this.isPaginated && this.settings.axis === "horizontal" && dir === "rtl") {
+      } else if (this.isPaginated && this.settings.axis === 'horizontal' && dir === 'rtl') {
         this.scrollLeft = this.container.scrollLeft;
 
-        if (this.settings.rtlScrollType === "default") {
+        if (this.settings.rtlScrollType === 'default') {
           left = this.container.scrollLeft;
 
           if (left > 0) {
@@ -8012,7 +8014,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
             next = this.views.last().section.next();
           }
         }
-      } else if (this.isPaginated && this.settings.axis === "vertical") {
+      } else if (this.isPaginated && this.settings.axis === 'vertical') {
         this.scrollTop = this.container.scrollTop;
         var top = this.container.scrollTop + this.container.offsetHeight;
 
@@ -8026,12 +8028,16 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
       }
 
       if (next) {
+        if (this.settings.baseUrl && !next.baseUrl) {
+          next.baseUrl = this.settings.baseUrl;
+        }
+
         this.clear(); // The new section may have a different writing-mode from the old section. Thus, we need to update layout.
 
         this.updateLayout();
         var forceRight = false;
 
-        if (this.layout.name === "pre-paginated" && this.layout.divisor === 2 && next.properties.includes("page-spread-right")) {
+        if (this.layout.name === 'pre-paginated' && this.layout.divisor === 2 && next.properties.includes('page-spread-right')) {
           forceRight = true;
         }
 
@@ -8041,7 +8047,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
           return err;
         }).then(function () {
           // Reset position to start for scrolled-doc vertical-rl in default mode
-          if (!this.isPaginated && this.settings.axis === "horizontal" && this.settings.direction === "rtl" && this.settings.rtlScrollType === "default") {
+          if (!this.isPaginated && this.settings.axis === 'horizontal' && this.settings.direction === 'rtl' && this.settings.rtlScrollType === 'default') {
             this.scrollTo(this.container.scrollWidth, 0, true);
           }
 
@@ -8057,7 +8063,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
       var dir = this.settings.direction;
       if (!this.views.length) return;
 
-      if (this.isPaginated && this.settings.axis === "horizontal" && (!dir || dir === "ltr")) {
+      if (this.isPaginated && this.settings.axis === 'horizontal' && (!dir || dir === 'ltr')) {
         this.scrollLeft = this.container.scrollLeft;
         left = this.container.scrollLeft;
 
@@ -8066,10 +8072,10 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
         } else {
           prev = this.views.first().section.prev();
         }
-      } else if (this.isPaginated && this.settings.axis === "horizontal" && dir === "rtl") {
+      } else if (this.isPaginated && this.settings.axis === 'horizontal' && dir === 'rtl') {
         this.scrollLeft = this.container.scrollLeft;
 
-        if (this.settings.rtlScrollType === "default") {
+        if (this.settings.rtlScrollType === 'default') {
           left = this.container.scrollLeft + this.container.offsetWidth;
 
           if (left < this.container.scrollWidth) {
@@ -8086,7 +8092,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
             prev = this.views.first().section.prev();
           }
         }
-      } else if (this.isPaginated && this.settings.axis === "vertical") {
+      } else if (this.isPaginated && this.settings.axis === 'vertical') {
         this.scrollTop = this.container.scrollTop;
         var top = this.container.scrollTop;
 
@@ -8105,14 +8111,14 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
         this.updateLayout();
         var forceRight = false;
 
-        if (this.layout.name === "pre-paginated" && this.layout.divisor === 2 && _typeof(prev.prev()) !== "object") {
+        if (this.layout.name === 'pre-paginated' && this.layout.divisor === 2 && _typeof(prev.prev()) !== 'object') {
           forceRight = true;
         }
 
         return this.prepend(prev, forceRight).then(function () {
           var left;
 
-          if (this.layout.name === "pre-paginated" && this.layout.divisor > 1) {
+          if (this.layout.name === 'pre-paginated' && this.layout.divisor > 1) {
             left = prev.prev();
 
             if (left) {
@@ -8122,9 +8128,9 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
         }.bind(this), function (err) {
           return err;
         }).then(function () {
-          if (this.isPaginated && this.settings.axis === "horizontal") {
-            if (this.settings.direction === "rtl") {
-              if (this.settings.rtlScrollType === "default") {
+          if (this.isPaginated && this.settings.axis === 'horizontal') {
+            if (this.settings.direction === 'rtl') {
+              if (this.settings.rtlScrollType === 'default') {
                 this.scrollTo(0, 0, true);
               } else {
                 this.scrollTo(this.container.scrollWidth * -1 + this.layout.delta, 0, true);
@@ -8165,7 +8171,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
     value: function currentLocation() {
       this.updateLayout();
 
-      if (this.isPaginated && this.settings.axis === "horizontal") {
+      if (this.isPaginated && this.settings.axis === 'horizontal') {
         this.location = this.paginatedLocation();
       } else {
         this.location = this.scrolledLocation();
@@ -8182,8 +8188,8 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
       var container = this.container.getBoundingClientRect();
       var pageHeight = container.height < window.innerHeight ? container.height : window.innerHeight;
       var pageWidth = container.width < window.innerWidth ? container.width : window.innerWidth;
-      var vertical = this.settings.axis === "vertical";
-      var rtl = this.settings.direction === "rtl";
+      var vertical = this.settings.axis === 'vertical';
+      var rtl = this.settings.direction === 'rtl';
       var offset = 0;
       var used = 0;
 
@@ -8219,7 +8225,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
         var pages = [];
         var endPage = Math.ceil(endPos / stopPos); // Reverse page counts for horizontal rtl
 
-        if (_this4.settings.direction === "rtl" && !vertical) {
+        if (_this4.settings.direction === 'rtl' && !vertical) {
           var tempStartPage = currPage;
           currPage = totalPages - endPage;
           endPage = totalPages - tempStartPage;
@@ -8270,7 +8276,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
         var end;
         var pageWidth;
 
-        if (_this5.settings.direction === "rtl") {
+        if (_this5.settings.direction === 'rtl') {
           offset = container.right - left;
           pageWidth = Math.min(Math.abs(offset - position.left), _this5.layout.width) - used;
           end = position.width - (position.right - offset) - used;
@@ -8298,7 +8304,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
         } // Reverse page counts for rtl
 
 
-        if (_this5.settings.direction === "rtl") {
+        if (_this5.settings.direction === 'rtl') {
           var tempStartPage = startPage;
           startPage = totalPages - endPage;
           endPage = totalPages - tempStartPage;
@@ -8326,9 +8332,9 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
 
       var container = _container || this.bounds();
 
-      if (this.settings.axis === "horizontal" && position.right > container.left - offsetPrev && position.left < container.right + offsetNext) {
+      if (this.settings.axis === 'horizontal' && position.right > container.left - offsetPrev && position.left < container.right + offsetNext) {
         return true;
-      } else if (this.settings.axis === "vertical" && position.bottom > container.top - offsetPrev && position.top < container.bottom + offsetNext) {
+      } else if (this.settings.axis === 'vertical' && position.bottom > container.top - offsetPrev && position.top < container.bottom + offsetNext) {
         return true;
       }
 
@@ -8358,7 +8364,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
   }, {
     key: "scrollBy",
     value: function scrollBy(x, y, silent) {
-      var dir = this.settings.direction === "rtl" ? -1 : 1;
+      var dir = this.settings.direction === 'rtl' ? -1 : 1;
 
       if (silent) {
         this.ignore = true;
@@ -8435,7 +8441,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
       this.layout = layout;
       this.updateLayout();
 
-      if (this.views && this.views.length > 0 && this.layout.name === "pre-paginated") {
+      if (this.views && this.views.length > 0 && this.layout.name === 'pre-paginated') {
         this.display(this.views.first().section);
       } // this.manager.layout(this.layout.format);
 
@@ -8497,8 +8503,8 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
       }
 
       if (this.layout) {
-        if (axis === "vertical") {
-          this.layout.spread("none");
+        if (axis === 'vertical') {
+          this.layout.spread('none');
         } else {
           this.layout.spread(this.layout.settings.spread);
         }
@@ -8507,20 +8513,20 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
   }, {
     key: "updateFlow",
     value: function updateFlow(flow) {
-      var defaultScrolledOverflow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "auto";
-      var isPaginated = flow === "paginated" || flow === "auto";
+      var defaultScrolledOverflow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'auto';
+      var isPaginated = flow === 'paginated' || flow === 'auto';
       this.isPaginated = isPaginated;
 
-      if (flow === "scrolled-doc" || flow === "scrolled-continuous" || flow === "scrolled") {
-        this.updateAxis("vertical");
+      if (flow === 'scrolled-doc' || flow === 'scrolled-continuous' || flow === 'scrolled') {
+        this.updateAxis('vertical');
       } else {
-        this.updateAxis("horizontal");
+        this.updateAxis('horizontal');
       }
 
       this.viewSettings.flow = flow;
 
       if (!this.settings.overflow) {
-        this.overflow = isPaginated ? "hidden" : defaultScrolledOverflow;
+        this.overflow = isPaginated ? 'hidden' : defaultScrolledOverflow;
       } else {
         this.overflow = this.settings.overflow;
       }
@@ -8549,7 +8555,7 @@ var default_DefaultViewManager = /*#__PURE__*/function () {
   }, {
     key: "direction",
     value: function direction() {
-      var dir = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "ltr";
+      var dir = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'ltr';
       this.settings.direction = dir;
       this.stage && this.stage.direction(dir);
       this.viewSettings.direction = dir;
@@ -13927,8 +13933,8 @@ var rendition_Rendition = /*#__PURE__*/function () {
         return displayed;
       }
 
-      if (this.settings.baseUrl) {
-        section.url = this.settings.baseUrl + section.url;
+      if (this.settings.baseUrl && !section.baseUrl) {
+        section.baseUrl = this.settings.baseUrl;
       }
 
       this.manager.display(section, target).then(function () {

@@ -104,7 +104,8 @@ export function replaceLinks(contents, fn) {
         if (linkUrl && linkUrl.hash) {
           fn(linkUrl.Path.path + linkUrl.hash);
         } else if (linkUrl) {
-          fn(linkUrl.Path.path);
+          // fn(linkUrl.Path.path);
+          fn(linkUrl.href);
         } else {
           fn(href);
         }
