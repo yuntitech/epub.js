@@ -14622,7 +14622,7 @@ class spine_Spine {
     this.items = _package.spine;
     this.manifest = _package.manifest;
     this.spineNodeIndex = _package.spineNodeIndex;
-    this.baseUrl = _package.baseUrl || _package.basePath || "";
+    this.baseUrl = _package.baseUrl || _package.basePath || '';
     this.length = this.items.length;
     this.items.forEach((item, index) => {
       var manifestItem = this.manifest[item.idref];
@@ -14645,7 +14645,7 @@ class spine_Spine {
         }
       }
 
-      if (item.linear === "yes") {
+      if (item.linear === 'yes') {
         item.prev = function () {
           let prevIndex = item.index;
 
@@ -14706,7 +14706,7 @@ class spine_Spine {
   get(target) {
     var index = 0;
 
-    if (typeof target === "undefined") {
+    if (typeof target === 'undefined') {
       while (index < this.spineItems.length) {
         let next = this.spineItems[index];
 
@@ -14719,14 +14719,20 @@ class spine_Spine {
     } else if (this.epubcfi.isCfiString(target)) {
       let cfi = new epubcfi["a" /* default */](target);
       index = cfi.spinePos;
-    } else if (typeof target === "number" || isNaN(target) === false) {
+    } else if (typeof target === 'number' || isNaN(target) === false) {
       index = target;
-    } else if (typeof target === "string" && target.indexOf("#") === 0) {
+    } else if (typeof target === 'string' && target.indexOf('#') === 0) {
       index = this.spineById[target.substring(1)];
-    } else if (typeof target === "string") {
+    } else if (typeof target === 'string') {
       // Remove fragments
-      target = target.split("#")[0];
-      index = this.spineByHref[target] || this.spineByHref[encodeURI(target)];
+      target = target.split('#')[0];
+      index = this.spineByHref[target] || this.spineByHref[encodeURI(target)]; // 解决 target 为完整路径时 index 为 undefined 的问题
+
+      if (!index) {
+        // TODO: cenfeng - 这里 Text 是否会变？
+        target = target.slice(target.indexOf('Text'));
+        index = this.spineByHref[target] || this.spineByHref[encodeURI(target)];
+      }
     }
 
     return this.spineItems[index] || null;
