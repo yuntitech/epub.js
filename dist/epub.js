@@ -16345,7 +16345,7 @@ function lookup(filename) {
 class resources_Resources {
   constructor(manifest, options) {
     this.settings = {
-      replacements: options && options.replacements || "base64",
+      replacements: options && options.replacements || 'base64',
       archive: options && options.archive,
       resolver: options && options.resolver,
       request: options && options.request
@@ -16381,19 +16381,23 @@ class resources_Resources {
   split() {
     // HTML
     this.html = this.resources.filter(function (item) {
-      if (item.type === "application/xhtml+xml" || item.type === "text/html") {
+      if (item.type === 'application/xhtml+xml' || item.type === 'text/html') {
         return true;
       }
     }); // Exclude HTML
 
     this.assets = this.resources.filter(function (item) {
-      if (item.type !== "application/xhtml+xml" && item.type !== "text/html") {
+      if (item.type === 'application/x-dtbncx+xml' || item.type === 'text/css') {
         return true;
-      }
+      } // if (item.type !== "application/xhtml+xml" &&
+      // 		item.type !== "text/html") {
+      // 	return true;
+      // }
+
     }); // Only CSS
 
     this.css = this.resources.filter(function (item) {
-      if (item.type === "text/css") {
+      if (item.type === 'text/css') {
         return true;
       }
     });
@@ -16427,10 +16431,10 @@ class resources_Resources {
 
     if (this.settings.archive) {
       return this.settings.archive.createUrl(url, {
-        "base64": this.settings.replacements === "base64"
+        base64: this.settings.replacements === 'base64'
       });
     } else {
-      if (this.settings.replacements === "base64") {
+      if (this.settings.replacements === 'base64') {
         return this.settings.request(url, 'blob').then(blob => {
           return Object(core["blob2base64"])(blob);
         }).then(blob => {
@@ -16450,7 +16454,7 @@ class resources_Resources {
 
 
   replacements() {
-    if (this.settings.replacements === "none") {
+    if (this.settings.replacements === 'none') {
       return new Promise(function (resolve) {
         resolve(this.urls);
       }.bind(this));
@@ -16465,7 +16469,7 @@ class resources_Resources {
     });
     return Promise.all(replacements).then(replacementUrls => {
       this.replacementUrls = replacementUrls.filter(url => {
-        return typeof url === "string";
+        return typeof url === 'string';
       });
       return replacementUrls;
     });
@@ -16520,7 +16524,7 @@ class resources_Resources {
     if (this.settings.archive) {
       textResponse = this.settings.archive.getText(absolute);
     } else {
-      textResponse = this.settings.request(absolute, "text");
+      textResponse = this.settings.request(absolute, 'text');
     } // Get asset links relative to css file
 
 
@@ -16541,10 +16545,10 @@ class resources_Resources {
       // Replacements in the css text
       text = Object(replacements["e" /* substitute */])(text, relUrls, this.replacementUrls); // Get the new url
 
-      if (this.settings.replacements === "base64") {
-        newUrl = Object(core["createBase64Url"])(text, "text/css");
+      if (this.settings.replacements === 'base64') {
+        newUrl = Object(core["createBase64Url"])(text, 'text/css');
       } else {
-        newUrl = Object(core["createBlobUrl"])(text, "text/css");
+        newUrl = Object(core["createBlobUrl"])(text, 'text/css');
       }
 
       return newUrl;
