@@ -5561,19 +5561,19 @@ class Mapping {
 
 
 
-const hasNavigator = typeof navigator !== "undefined";
+const hasNavigator = typeof navigator !== 'undefined';
 const isChrome = hasNavigator && /Chrome/.test(navigator.userAgent);
 const isWebkit = hasNavigator && !isChrome && /AppleWebKit/.test(navigator.userAgent);
 const ELEMENT_NODE = 1;
 const TEXT_NODE = 3;
 /**
-	* Handles DOM manipulation, queries and events for View contents
-	* @class
-	* @param {document} doc Document
-	* @param {element} content Parent Element (typically Body)
-	* @param {string} cfiBase Section component of CFIs
-	* @param {number} sectionIndex Index in Spine of Conntent's Section
-	*/
+ * Handles DOM manipulation, queries and events for View contents
+ * @class
+ * @param {document} doc Document
+ * @param {element} content Parent Element (typically Body)
+ * @param {string} cfiBase Section component of CFIs
+ * @param {number} sectionIndex Index in Spine of Conntent's Section
+ */
 
 class Contents {
   constructor(doc, content, cfiBase, sectionIndex) {
@@ -5588,25 +5588,25 @@ class Contents {
       height: 0
     };
     this.sectionIndex = sectionIndex || 0;
-    this.cfiBase = cfiBase || "";
-    this.epubReadingSystem("epub.js", _utils_constants__WEBPACK_IMPORTED_MODULE_5__[/* EPUBJS_VERSION */ "b"]);
+    this.cfiBase = cfiBase || '';
+    this.epubReadingSystem('epub.js', _utils_constants__WEBPACK_IMPORTED_MODULE_5__[/* EPUBJS_VERSION */ "b"]);
     this.called = 0;
     this.active = true;
     this.listeners();
   }
   /**
-  	* Get DOM events that are listened for and passed along
-  	*/
+   * Get DOM events that are listened for and passed along
+   */
 
 
   static get listenedEvents() {
     return _utils_constants__WEBPACK_IMPORTED_MODULE_5__[/* DOM_EVENTS */ "a"];
   }
   /**
-  	* Get or Set width
-  	* @param {number} [w]
-  	* @returns {number} width
-  	*/
+   * Get or Set width
+   * @param {number} [w]
+   * @returns {number} width
+   */
 
 
   width(w) {
@@ -5614,20 +5614,20 @@ class Contents {
     var frame = this.content;
 
     if (w && Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(w)) {
-      w = w + "px";
+      w = w + 'px';
     }
 
     if (w) {
       frame.style.width = w; // this.content.style.width = w;
     }
 
-    return parseInt(this.window.getComputedStyle(frame)["width"]);
+    return parseInt(this.window.getComputedStyle(frame)['width']);
   }
   /**
-  	* Get or Set height
-  	* @param {number} [h]
-  	* @returns {number} height
-  	*/
+   * Get or Set height
+   * @param {number} [h]
+   * @returns {number} height
+   */
 
 
   height(h) {
@@ -5635,59 +5635,59 @@ class Contents {
     var frame = this.content;
 
     if (h && Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(h)) {
-      h = h + "px";
+      h = h + 'px';
     }
 
     if (h) {
       frame.style.height = h; // this.content.style.height = h;
     }
 
-    return parseInt(this.window.getComputedStyle(frame)["height"]);
+    return parseInt(this.window.getComputedStyle(frame)['height']);
   }
   /**
-  	* Get or Set width of the contents
-  	* @param {number} [w]
-  	* @returns {number} width
-  	*/
+   * Get or Set width of the contents
+   * @param {number} [w]
+   * @returns {number} width
+   */
 
 
   contentWidth(w) {
     var content = this.content || this.document.body;
 
     if (w && Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(w)) {
-      w = w + "px";
+      w = w + 'px';
     }
 
     if (w) {
       content.style.width = w;
     }
 
-    return parseInt(this.window.getComputedStyle(content)["width"]);
+    return parseInt(this.window.getComputedStyle(content)['width']);
   }
   /**
-  	* Get or Set height of the contents
-  	* @param {number} [h]
-  	* @returns {number} height
-  	*/
+   * Get or Set height of the contents
+   * @param {number} [h]
+   * @returns {number} height
+   */
 
 
   contentHeight(h) {
     var content = this.content || this.document.body;
 
     if (h && Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(h)) {
-      h = h + "px";
+      h = h + 'px';
     }
 
     if (h) {
       content.style.height = h;
     }
 
-    return parseInt(this.window.getComputedStyle(content)["height"]);
+    return parseInt(this.window.getComputedStyle(content)['height']);
   }
   /**
-  	* Get the width of the text using Range
-  	* @returns {number} width
-  	*/
+   * Get the width of the text using Range
+   * @returns {number} width
+   */
 
 
   textWidth() {
@@ -5709,9 +5709,9 @@ class Contents {
     return Math.round(width);
   }
   /**
-  	* Get the height of the text using Range
-  	* @returns {number} height
-  	*/
+   * Get the height of the text using Range
+   * @returns {number} height
+   */
 
 
   textHeight() {
@@ -5725,9 +5725,9 @@ class Contents {
     return Math.round(height);
   }
   /**
-  	* Get documentElement scrollWidth
-  	* @returns {number} width
-  	*/
+   * Get documentElement scrollWidth
+   * @returns {number} width
+   */
 
 
   scrollWidth() {
@@ -5735,9 +5735,9 @@ class Contents {
     return width;
   }
   /**
-  	* Get documentElement scrollHeight
-  	* @returns {number} height
-  	*/
+   * Get documentElement scrollHeight
+   * @returns {number} height
+   */
 
 
   scrollHeight() {
@@ -5745,9 +5745,9 @@ class Contents {
     return height;
   }
   /**
-  	* Set overflow css style of the contents
-  	* @param {string} [overflow]
-  	*/
+   * Set overflow css style of the contents
+   * @param {string} [overflow]
+   */
 
 
   overflow(overflow) {
@@ -5755,12 +5755,12 @@ class Contents {
       this.documentElement.style.overflow = overflow;
     }
 
-    return this.window.getComputedStyle(this.documentElement)["overflow"];
+    return this.window.getComputedStyle(this.documentElement)['overflow'];
   }
   /**
-  	* Set overflowX css style of the documentElement
-  	* @param {string} [overflow]
-  	*/
+   * Set overflowX css style of the documentElement
+   * @param {string} [overflow]
+   */
 
 
   overflowX(overflow) {
@@ -5768,12 +5768,12 @@ class Contents {
       this.documentElement.style.overflowX = overflow;
     }
 
-    return this.window.getComputedStyle(this.documentElement)["overflowX"];
+    return this.window.getComputedStyle(this.documentElement)['overflowX'];
   }
   /**
-  	* Set overflowY css style of the documentElement
-  	* @param {string} [overflow]
-  	*/
+   * Set overflowY css style of the documentElement
+   * @param {string} [overflow]
+   */
 
 
   overflowY(overflow) {
@@ -5781,21 +5781,21 @@ class Contents {
       this.documentElement.style.overflowY = overflow;
     }
 
-    return this.window.getComputedStyle(this.documentElement)["overflowY"];
+    return this.window.getComputedStyle(this.documentElement)['overflowY'];
   }
   /**
-  	* Set Css styles on the contents element (typically Body)
-  	* @param {string} property
-  	* @param {string} value
-  	* @param {boolean} [priority] set as "important"
-  	*/
+   * Set Css styles on the contents element (typically Body)
+   * @param {string} property
+   * @param {string} value
+   * @param {boolean} [priority] set as "important"
+   */
 
 
   css(property, value, priority) {
     var content = this.content || this.document.body;
 
     if (value) {
-      content.style.setProperty(property, value, priority ? "important" : "");
+      content.style.setProperty(property, value, priority ? 'important' : '');
     } else {
       content.style.removeProperty(property);
     }
@@ -5803,15 +5803,15 @@ class Contents {
     return this.window.getComputedStyle(content)[property];
   }
   /**
-  	* Get or Set the viewport element
-  	* @param {object} [options]
-  	* @param {string} [options.width]
-  	* @param {string} [options.height]
-  	* @param {string} [options.scale]
-  	* @param {string} [options.minimum]
-  	* @param {string} [options.maximum]
-  	* @param {string} [options.scalable]
-  	*/
+   * Get or Set the viewport element
+   * @param {object} [options]
+   * @param {string} [options.width]
+   * @param {string} [options.height]
+   * @param {string} [options.scale]
+   * @param {string} [options.minimum]
+   * @param {string} [options.maximum]
+   * @param {string} [options.scalable]
+   */
 
 
   viewport(options) {
@@ -5820,22 +5820,22 @@ class Contents {
 
     var $viewport = this.document.querySelector("meta[name='viewport']");
     var parsed = {
-      "width": undefined,
-      "height": undefined,
-      "scale": undefined,
-      "minimum": undefined,
-      "maximum": undefined,
-      "scalable": undefined
+      width: undefined,
+      height: undefined,
+      scale: undefined,
+      minimum: undefined,
+      maximum: undefined,
+      scalable: undefined
     };
     var newContent = [];
     var settings = {};
     /*
-    * check for the viewport size
-    * <meta name="viewport" content="width=1024,height=697" />
-    */
+     * check for the viewport size
+     * <meta name="viewport" content="width=1024,height=697" />
+     */
 
-    if ($viewport && $viewport.hasAttribute("content")) {
-      let content = $viewport.getAttribute("content");
+    if ($viewport && $viewport.hasAttribute('content')) {
+      let content = $viewport.getAttribute('content');
 
       let _width = content.match(/width\s*=\s*([^,]*)/);
 
@@ -5849,27 +5849,27 @@ class Contents {
 
       let _scalable = content.match(/user-scalable\s*=\s*([^,]*)/);
 
-      if (_width && _width.length && typeof _width[1] !== "undefined") {
+      if (_width && _width.length && typeof _width[1] !== 'undefined') {
         parsed.width = _width[1];
       }
 
-      if (_height && _height.length && typeof _height[1] !== "undefined") {
+      if (_height && _height.length && typeof _height[1] !== 'undefined') {
         parsed.height = _height[1];
       }
 
-      if (_scale && _scale.length && typeof _scale[1] !== "undefined") {
+      if (_scale && _scale.length && typeof _scale[1] !== 'undefined') {
         parsed.scale = _scale[1];
       }
 
-      if (_minimum && _minimum.length && typeof _minimum[1] !== "undefined") {
+      if (_minimum && _minimum.length && typeof _minimum[1] !== 'undefined') {
         parsed.minimum = _minimum[1];
       }
 
-      if (_maximum && _maximum.length && typeof _maximum[1] !== "undefined") {
+      if (_maximum && _maximum.length && typeof _maximum[1] !== 'undefined') {
         parsed.maximum = _maximum[1];
       }
 
-      if (_scalable && _scalable.length && typeof _scalable[1] !== "undefined") {
+      if (_scalable && _scalable.length && typeof _scalable[1] !== 'undefined') {
         parsed.scalable = _scalable[1];
       }
     }
@@ -5878,42 +5878,44 @@ class Contents {
 
     if (options) {
       if (settings.width) {
-        newContent.push("width=" + settings.width);
+        newContent.push('width=' + settings.width);
       }
 
       if (settings.height) {
-        newContent.push("height=" + settings.height);
+        newContent.push('height=' + settings.height);
       }
 
       if (settings.scale) {
-        newContent.push("initial-scale=" + settings.scale);
+        newContent.push('initial-scale=' + settings.scale);
       }
 
-      if (settings.scalable === "no") {
-        newContent.push("minimum-scale=" + settings.scale);
-        newContent.push("maximum-scale=" + settings.scale);
-        newContent.push("user-scalable=" + settings.scalable);
+      if (settings.scalable === 'no') {
+        newContent.push('minimum-scale=' + settings.scale);
+        newContent.push('maximum-scale=' + settings.scale);
+        newContent.push('user-scalable=' + settings.scalable); // 增加对 iOS 刘海屏的适配
+
+        newContent.push('viewport-fit=cover');
       } else {
         if (settings.scalable) {
-          newContent.push("user-scalable=" + settings.scalable);
+          newContent.push('user-scalable=' + settings.scalable);
         }
 
         if (settings.minimum) {
-          newContent.push("minimum-scale=" + settings.minimum);
+          newContent.push('minimum-scale=' + settings.minimum);
         }
 
         if (settings.maximum) {
-          newContent.push("minimum-scale=" + settings.maximum);
+          newContent.push('minimum-scale=' + settings.maximum);
         }
       }
 
       if (!$viewport) {
-        $viewport = this.document.createElement("meta");
-        $viewport.setAttribute("name", "viewport");
-        this.document.querySelector("head").appendChild($viewport);
+        $viewport = this.document.createElement('meta');
+        $viewport.setAttribute('name', 'viewport');
+        this.document.querySelector('head').appendChild($viewport);
       }
 
-      $viewport.setAttribute("content", newContent.join(", "));
+      $viewport.setAttribute('content', newContent.join(', '));
       this.window.scrollTo(0, 0);
     }
 
@@ -5941,7 +5943,7 @@ class Contents {
     this.addEventListeners();
     this.addSelectionListeners(); // this.transitionListeners();
 
-    if (typeof ResizeObserver === "undefined") {
+    if (typeof ResizeObserver === 'undefined') {
       this.resizeListeners();
       this.visibilityListeners();
     } else {
@@ -6007,8 +6009,8 @@ class Contents {
 
 
   visibilityListeners() {
-    document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "visible" && this.active === false) {
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && this.active === false) {
         this.active = true;
         this.resizeListeners();
       } else {
@@ -6025,10 +6027,10 @@ class Contents {
 
   transitionListeners() {
     let body = this.content;
-    body.style['transitionProperty'] = "font, font-size, font-size-adjust, font-stretch, font-variation-settings, font-weight, width, height";
-    body.style['transitionDuration'] = "0.001ms";
-    body.style['transitionTimingFunction'] = "linear";
-    body.style['transitionDelay'] = "0";
+    body.style['transitionProperty'] = 'font, font-size, font-size-adjust, font-stretch, font-variation-settings, font-weight, width, height';
+    body.style['transitionDuration'] = '0.001ms';
+    body.style['transitionTimingFunction'] = 'linear';
+    body.style['transitionDelay'] = '0';
     this._resizeCheck = this.resizeCheck.bind(this);
     this.document.addEventListener('transitionend', this._resizeCheck);
   }
@@ -6110,13 +6112,13 @@ class Contents {
 
 
   imageLoadListeners() {
-    var images = this.document.querySelectorAll("img");
+    var images = this.document.querySelectorAll('img');
     var img;
 
     for (var i = 0; i < images.length; i++) {
       img = images[i];
 
-      if (typeof img.naturalWidth !== "undefined" && img.naturalWidth === 0) {
+      if (typeof img.naturalWidth !== 'undefined' && img.naturalWidth === 0) {
         img.onload = this.expand.bind(this);
       }
     }
@@ -6157,8 +6159,8 @@ class Contents {
   locationOf(target, ignoreClass) {
     var position;
     var targetPos = {
-      "left": 0,
-      "top": 0
+      left: 0,
+      top: 0
     };
     if (!this.document) return targetPos;
 
@@ -6172,7 +6174,7 @@ class Contents {
             // true. This in turn leads to inconsistent behaviour when calling
             // getBoundingRect. Wrong bounds lead to the wrong page being displayed.
             // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/15684911/
-            let pos = range.startContainer.textContent.indexOf(" ", range.startOffset);
+            let pos = range.startContainer.textContent.indexOf(' ', range.startOffset);
 
             if (pos == -1) {
               pos = range.startContainer.textContent.length;
@@ -6181,7 +6183,7 @@ class Contents {
             range.setEnd(range.startContainer, pos);
           }
         } catch (e) {
-          console.error("setting end offset to start container length failed", e);
+          console.error('setting end offset to start container length failed', e);
         }
 
         if (range.startContainer.nodeType === Node.ELEMENT_NODE) {
@@ -6219,8 +6221,8 @@ class Contents {
           }
         }
       }
-    } else if (typeof target === "string" && target.indexOf("#") > -1) {
-      let id = target.substring(target.indexOf("#") + 1);
+    } else if (typeof target === 'string' && target.indexOf('#') > -1) {
+      let id = target.substring(target.indexOf('#') + 1);
       let el = this.document.getElementById(id);
 
       if (el) {
@@ -6266,13 +6268,13 @@ class Contents {
         return; // already present
       }
 
-      $stylesheet = this.document.createElement("link");
-      $stylesheet.type = "text/css";
-      $stylesheet.rel = "stylesheet";
+      $stylesheet = this.document.createElement('link');
+      $stylesheet.type = 'text/css';
+      $stylesheet.rel = 'stylesheet';
       $stylesheet.href = src;
 
       $stylesheet.onload = $stylesheet.onreadystatechange = function () {
-        if (!ready && (!this.readyState || this.readyState == "complete")) {
+        if (!ready && (!this.readyState || this.readyState == 'complete')) {
           ready = true; // Let apply
 
           setTimeout(() => {
@@ -6287,13 +6289,13 @@ class Contents {
 
   _getStylesheetNode(key) {
     var styleEl;
-    key = "epubjs-inserted-css-" + (key || '');
+    key = 'epubjs-inserted-css-' + (key || '');
     if (!this.document) return false; // Check if link already exists
 
     styleEl = this.document.getElementById(key);
 
     if (!styleEl) {
-      styleEl = this.document.createElement("style");
+      styleEl = this.document.createElement('style');
       styleEl.id = key; // Append style element to head
 
       this.document.head.appendChild(styleEl);
@@ -6330,25 +6332,25 @@ class Contents {
 
     styleSheet = this._getStylesheetNode(key).sheet;
 
-    if (Object.prototype.toString.call(rules) === "[object Array]") {
+    if (Object.prototype.toString.call(rules) === '[object Array]') {
       for (var i = 0, rl = rules.length; i < rl; i++) {
         var j = 1,
             rule = rules[i],
             selector = rules[i][0],
-            propStr = ""; // If the second argument of a rule is an array of arrays, correct our variables.
+            propStr = ''; // If the second argument of a rule is an array of arrays, correct our variables.
 
-        if (Object.prototype.toString.call(rule[1][0]) === "[object Array]") {
+        if (Object.prototype.toString.call(rule[1][0]) === '[object Array]') {
           rule = rule[1];
           j = 0;
         }
 
         for (var pl = rule.length; j < pl; j++) {
           var prop = rule[j];
-          propStr += prop[0] + ":" + prop[1] + (prop[2] ? " !important" : "") + ";\n";
+          propStr += prop[0] + ':' + prop[1] + (prop[2] ? ' !important' : '') + ';\n';
         } // Insert CSS Rule
 
 
-        styleSheet.insertRule(selector + "{" + propStr + "}", styleSheet.cssRules.length);
+        styleSheet.insertRule(selector + '{' + propStr + '}', styleSheet.cssRules.length);
       }
     } else {
       const selectors = Object.keys(rules);
@@ -6394,13 +6396,13 @@ class Contents {
         return;
       }
 
-      $script = this.document.createElement("script");
-      $script.type = "text/javascript";
+      $script = this.document.createElement('script');
+      $script.type = 'text/javascript';
       $script.async = true;
       $script.src = src;
 
       $script.onload = $script.onreadystatechange = function () {
-        if (!ready && (!this.readyState || this.readyState == "complete")) {
+        if (!ready && (!this.readyState || this.readyState == 'complete')) {
           ready = true;
           setTimeout(function () {
             resolve(true);
@@ -6498,7 +6500,7 @@ class Contents {
     }
 
     this._onSelectionChange = this.onSelectionChange.bind(this);
-    this.document.addEventListener("selectionchange", this._onSelectionChange, {
+    this.document.addEventListener('selectionchange', this._onSelectionChange, {
       passive: true
     });
   }
@@ -6513,7 +6515,7 @@ class Contents {
       return;
     }
 
-    this.document.removeEventListener("selectionchange", this._onSelectionChange, {
+    this.document.removeEventListener('selectionchange', this._onSelectionChange, {
       passive: true
     });
     this._onSelectionChange = undefined;
@@ -6604,14 +6606,14 @@ class Contents {
   size(width, height) {
     var viewport = {
       scale: 1.0,
-      scalable: "no"
+      scalable: 'no'
     };
-    this.layoutStyle("scrolling");
+    this.layoutStyle('scrolling');
 
     if (width >= 0) {
       this.width(width);
       viewport.width = width;
-      this.css("padding", "0 " + width / 12 + "px");
+      this.css('padding', '0 ' + width / 12 + 'px');
     }
 
     if (height >= 0) {
@@ -6619,8 +6621,8 @@ class Contents {
       viewport.height = height;
     }
 
-    this.css("margin", "0");
-    this.css("box-sizing", "border-box");
+    this.css('margin', '0');
+    this.css('box-sizing', 'border-box');
     this.viewport(viewport);
   }
   /**
@@ -6633,15 +6635,15 @@ class Contents {
 
 
   columns(width, height, columnWidth, gap, dir) {
-    let COLUMN_AXIS = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["prefixed"])("column-axis");
-    let COLUMN_GAP = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["prefixed"])("column-gap");
-    let COLUMN_WIDTH = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["prefixed"])("column-width");
-    let COLUMN_FILL = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["prefixed"])("column-fill");
+    let COLUMN_AXIS = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["prefixed"])('column-axis');
+    let COLUMN_GAP = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["prefixed"])('column-gap');
+    let COLUMN_WIDTH = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["prefixed"])('column-width');
+    let COLUMN_FILL = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["prefixed"])('column-fill');
     let writingMode = this.writingMode();
-    let axis = writingMode.indexOf("vertical") === 0 ? "vertical" : "horizontal";
-    this.layoutStyle("paginated");
+    let axis = writingMode.indexOf('vertical') === 0 ? 'vertical' : 'horizontal';
+    this.layoutStyle('paginated');
 
-    if (dir === "rtl" && axis === "horizontal") {
+    if (dir === 'rtl' && axis === 'horizontal') {
       this.direction(dir);
     }
 
@@ -6652,36 +6654,36 @@ class Contents {
       width: width,
       height: height,
       scale: 1.0,
-      scalable: "no"
+      scalable: 'no'
     }); // TODO: inline-block needs more testing
     // Fixes Safari column cut offs, but causes RTL issues
     // this.css("display", "inline-block");
 
-    this.css("overflow-y", "hidden");
-    this.css("margin", "0", true);
+    this.css('overflow-y', 'hidden');
+    this.css('margin', '0', true);
 
-    if (axis === "vertical") {
-      this.css("padding-top", gap / 2 + "px", true);
-      this.css("padding-bottom", gap / 2 + "px", true);
-      this.css("padding-left", "20px");
-      this.css("padding-right", "20px");
-      this.css(COLUMN_AXIS, "vertical");
+    if (axis === 'vertical') {
+      this.css('padding-top', gap / 2 + 'px', true);
+      this.css('padding-bottom', gap / 2 + 'px', true);
+      this.css('padding-left', '20px');
+      this.css('padding-right', '20px');
+      this.css(COLUMN_AXIS, 'vertical');
     } else {
-      this.css("padding-top", "20px");
-      this.css("padding-bottom", "20px");
-      this.css("padding-left", gap / 2 + "px", true);
-      this.css("padding-right", gap / 2 + "px", true);
-      this.css(COLUMN_AXIS, "horizontal");
+      this.css('padding-top', '20px');
+      this.css('padding-bottom', '20px');
+      this.css('padding-left', gap / 2 + 'px', true);
+      this.css('padding-right', gap / 2 + 'px', true);
+      this.css(COLUMN_AXIS, 'horizontal');
     }
 
-    this.css("box-sizing", "border-box");
-    this.css("max-width", "inherit");
-    this.css(COLUMN_FILL, "auto");
-    this.css(COLUMN_GAP, gap + "px");
-    this.css(COLUMN_WIDTH, columnWidth + "px"); // Fix glyph clipping in WebKit
+    this.css('box-sizing', 'border-box');
+    this.css('max-width', 'inherit');
+    this.css(COLUMN_FILL, 'auto');
+    this.css(COLUMN_GAP, gap + 'px');
+    this.css(COLUMN_WIDTH, columnWidth + 'px'); // Fix glyph clipping in WebKit
     // https://github.com/futurepress/epub.js/issues/983
 
-    this.css("-webkit-line-box-contain", "block glyphs replaced");
+    this.css('-webkit-line-box-contain', 'block glyphs replaced');
   }
   /**
    * Scale contents from center
@@ -6692,16 +6694,16 @@ class Contents {
 
 
   scaler(scale, offsetX, offsetY) {
-    var scaleStr = "scale(" + scale + ")";
-    var translateStr = ""; // this.css("position", "absolute"));
+    var scaleStr = 'scale(' + scale + ')';
+    var translateStr = ''; // this.css("position", "absolute"));
 
-    this.css("transform-origin", "top left");
+    this.css('transform-origin', 'top left');
 
     if (offsetX >= 0 || offsetY >= 0) {
-      translateStr = " translate(" + (offsetX || 0) + "px, " + (offsetY || 0) + "px )";
+      translateStr = ' translate(' + (offsetX || 0) + 'px, ' + (offsetY || 0) + 'px )';
     }
 
-    this.css("transform", scaleStr + translateStr);
+    this.css('transform', scaleStr + translateStr);
   }
   /**
    * Fit contents into a fixed width and height
@@ -6723,22 +6725,22 @@ class Contents {
     // 	offsetX = width - (viewportWidth * scale);
     // }
 
-    this.layoutStyle("paginated"); // scale needs width and height to be set
+    this.layoutStyle('paginated'); // scale needs width and height to be set
 
     this.width(viewportWidth);
     this.height(viewportHeight);
-    this.overflow("hidden"); // Scale to the correct size
+    this.overflow('hidden'); // Scale to the correct size
 
     this.scaler(scale, 0, 0); // this.scaler(scale, offsetX > 0 ? offsetX : 0, offsetY);
     // background images are not scaled by transform
 
-    this.css("background-size", viewportWidth * scale + "px " + viewportHeight * scale + "px");
-    this.css("background-color", "transparent");
+    this.css('background-size', viewportWidth * scale + 'px ' + viewportHeight * scale + 'px');
+    this.css('background-color', 'transparent');
 
-    if (section && section.properties.includes("page-spread-left")) {
+    if (section && section.properties.includes('page-spread-left')) {
       // set margin since scale is weird
       var marginLeft = width - viewportWidth * scale;
-      this.css("margin-left", marginLeft + "px");
+      this.css('margin-left', marginLeft + 'px');
     }
   }
   /**
@@ -6749,7 +6751,7 @@ class Contents {
 
   direction(dir) {
     if (this.documentElement) {
-      this.documentElement.style["direction"] = dir;
+      this.documentElement.style['direction'] = dir;
     }
   }
 
@@ -6775,7 +6777,7 @@ class Contents {
 
 
   writingMode(mode) {
-    let WRITING_MODE = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["prefixed"])("writing-mode");
+    let WRITING_MODE = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["prefixed"])('writing-mode');
 
     if (mode && this.documentElement) {
       this.documentElement.style[WRITING_MODE] = mode;
@@ -6796,7 +6798,7 @@ class Contents {
       navigator.epubReadingSystem.layoutStyle = this._layoutStyle;
     }
 
-    return this._layoutStyle || "paginated";
+    return this._layoutStyle || 'paginated';
   }
   /**
    * Add the epubReadingSystem object to the navigator
@@ -6813,22 +6815,22 @@ class Contents {
       layoutStyle: this.layoutStyle(),
       hasFeature: function (feature) {
         switch (feature) {
-          case "dom-manipulation":
+          case 'dom-manipulation':
             return true;
 
-          case "layout-changes":
+          case 'layout-changes':
             return true;
 
-          case "touch-events":
+          case 'touch-events':
             return true;
 
-          case "mouse-events":
+          case 'mouse-events':
             return true;
 
-          case "keyboard-events":
+          case 'keyboard-events':
             return true;
 
-          case "spine-scripting":
+          case 'spine-scripting':
             return false;
 
           default:
