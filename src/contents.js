@@ -331,6 +331,8 @@ class Contents {
         newContent.push('minimum-scale=' + settings.scale);
         newContent.push('maximum-scale=' + settings.scale);
         newContent.push('user-scalable=' + settings.scalable);
+        // 增加对 iOS 刘海屏的适配
+        newContent.push('viewport-fit=cover');
       } else {
         if (settings.scalable) {
           newContent.push('user-scalable=' + settings.scalable);
