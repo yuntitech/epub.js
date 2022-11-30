@@ -9400,7 +9400,7 @@ module.exports = isObject;
 class IframeView {
   constructor(section, options) {
     this.settings = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["extend"])({
-      ignoreClass: "",
+      ignoreClass: '',
       axis: undefined,
       //options.layout && options.layout.props.flow === "scrolled" ? "vertical" : "horizontal",
       direction: undefined,
@@ -9413,7 +9413,7 @@ class IframeView {
       allowScriptedContent: false,
       allowPopups: false
     }, options || {});
-    this.id = "epubjs-view-" + Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["uuid"])();
+    this.id = 'epubjs-view-' + Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["uuid"])();
     this.section = section;
     this.index = section.index;
     this.element = this.container(this.settings.axis);
@@ -9436,19 +9436,19 @@ class IframeView {
   }
 
   container(axis) {
-    var element = document.createElement("div");
-    element.classList.add("epub-view"); // this.element.style.minHeight = "100px";
+    var element = document.createElement('div');
+    element.classList.add('epub-view'); // this.element.style.minHeight = "100px";
 
-    element.style.height = "0px";
-    element.style.width = "0px";
-    element.style.overflow = "hidden";
-    element.style.position = "relative";
-    element.style.display = "block";
+    element.style.height = '0px';
+    element.style.width = '0px';
+    element.style.overflow = 'hidden';
+    element.style.position = 'relative';
+    element.style.display = 'block';
 
-    if (axis && axis == "horizontal") {
-      element.style.flex = "none";
+    if (axis && axis == 'horizontal') {
+      element.style.flex = 'none';
     } else {
-      element.style.flex = "initial";
+      element.style.flex = 'initial';
     }
 
     return element;
@@ -9463,35 +9463,35 @@ class IframeView {
       this.element = this.createContainer();
     }
 
-    this.iframe = document.createElement("iframe");
+    this.iframe = document.createElement('iframe');
     this.iframe.id = this.id;
-    this.iframe.scrolling = "no"; // Might need to be removed: breaks ios width calculations
+    this.iframe.scrolling = 'no'; // Might need to be removed: breaks ios width calculations
 
-    this.iframe.style.overflow = "hidden";
-    this.iframe.seamless = "seamless"; // Back up if seamless isn't supported
+    this.iframe.style.overflow = 'hidden';
+    this.iframe.seamless = 'seamless'; // Back up if seamless isn't supported
 
-    this.iframe.style.border = "none"; // sandbox
+    this.iframe.style.border = 'none'; // sandbox
 
-    this.iframe.sandbox = "allow-same-origin";
+    this.iframe.sandbox = 'allow-same-origin';
 
     if (this.settings.allowScriptedContent) {
-      this.iframe.sandbox += " allow-scripts";
+      this.iframe.sandbox += ' allow-scripts';
     }
 
     if (this.settings.allowPopups) {
-      this.iframe.sandbox += " allow-popups";
+      this.iframe.sandbox += ' allow-popups';
     }
 
-    this.iframe.setAttribute("enable-annotation", "true");
+    this.iframe.setAttribute('enable-annotation', 'true');
     this.resizing = true; // this.iframe.style.display = "none";
 
-    this.element.style.visibility = "hidden";
-    this.iframe.style.visibility = "hidden";
-    this.iframe.style.width = "0";
-    this.iframe.style.height = "0";
+    this.element.style.visibility = 'hidden';
+    this.iframe.style.visibility = 'hidden';
+    this.iframe.style.width = '0';
+    this.iframe.style.height = '0';
     this._width = 0;
     this._height = 0;
-    this.element.setAttribute("ref", this.index);
+    this.element.setAttribute('ref', this.index);
     this.added = true;
     this.elementBounds = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["bounds"])(this.element); // if(width || height){
     //   this.resize(width, height);
@@ -9501,14 +9501,14 @@ class IframeView {
     //   this.iframeBounds = bounds(this.iframe);
     // }
 
-    if ("srcdoc" in this.iframe) {
+    if ('srcdoc' in this.iframe) {
       this.supportsSrcdoc = true;
     } else {
       this.supportsSrcdoc = false;
     }
 
     if (!this.settings.method) {
-      this.settings.method = this.supportsSrcdoc ? "srcdoc" : "write";
+      this.settings.method = this.supportsSrcdoc ? 'srcdoc' : 'write';
     }
 
     return this.iframe;
@@ -9533,13 +9533,13 @@ class IframeView {
 
       let axis;
 
-      if (this.settings.flow === "scrolled") {
-        axis = writingMode.indexOf("vertical") === 0 ? "horizontal" : "vertical";
+      if (this.settings.flow === 'scrolled') {
+        axis = writingMode.indexOf('vertical') === 0 ? 'horizontal' : 'vertical';
       } else {
-        axis = writingMode.indexOf("vertical") === 0 ? "vertical" : "horizontal";
+        axis = writingMode.indexOf('vertical') === 0 ? 'vertical' : 'horizontal';
       }
 
-      if (writingMode.indexOf("vertical") === 0 && this.settings.flow === "paginated") {
+      if (writingMode.indexOf('vertical') === 0 && this.settings.flow === 'paginated') {
         this.layout.delta = this.layout.height;
       }
 
@@ -9556,7 +9556,7 @@ class IframeView {
         this.expand();
 
         if (this.settings.forceRight) {
-          this.element.style.marginLeft = this.width() + "px";
+          this.element.style.marginLeft = this.width() + 'px';
         }
 
         resolve();
@@ -9573,8 +9573,8 @@ class IframeView {
 
   reset() {
     if (this.iframe) {
-      this.iframe.style.width = "0";
-      this.iframe.style.height = "0";
+      this.iframe.style.width = '0';
+      this.iframe.style.height = '0';
       this._width = 0;
       this._height = 0;
       this._textWidth = undefined;
@@ -9591,12 +9591,12 @@ class IframeView {
     var width = _width || this.settings.width;
     var height = _height || this.settings.height;
 
-    if (this.layout.name === "pre-paginated") {
-      this.lock("both", width, height);
-    } else if (this.settings.axis === "horizontal") {
-      this.lock("height", width, height);
+    if (this.layout.name === 'pre-paginated') {
+      this.lock('both', width, height);
+    } else if (this.settings.axis === 'horizontal') {
+      this.lock('height', width, height);
     } else {
-      this.lock("width", width, height);
+      this.lock('width', width, height);
     }
 
     this.settings.width = width;
@@ -9617,15 +9617,15 @@ class IframeView {
       };
     }
 
-    if (what == "width" && Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(width)) {
+    if (what == 'width' && Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(width)) {
       this.lockedWidth = width - elBorders.width - iframeBorders.width; // this.resize(this.lockedWidth, width); //  width keeps ratio correct
     }
 
-    if (what == "height" && Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(height)) {
+    if (what == 'height' && Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(height)) {
       this.lockedHeight = height - elBorders.height - iframeBorders.height; // this.resize(width, this.lockedHeight);
     }
 
-    if (what === "both" && Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(width) && Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(height)) {
+    if (what === 'both' && Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(width) && Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(height)) {
       this.lockedWidth = width - elBorders.width - iframeBorders.width;
       this.lockedHeight = height - elBorders.height - iframeBorders.height; // this.resize(this.lockedWidth, this.lockedHeight);
     }
@@ -9645,11 +9645,11 @@ class IframeView {
     if (!this.iframe || this._expanding) return;
     this._expanding = true;
 
-    if (this.layout.name === "pre-paginated") {
+    if (this.layout.name === 'pre-paginated') {
       width = this.layout.columnWidth;
       height = this.layout.height;
     } // Expand Horizontally
-    else if (this.settings.axis === "horizontal") {
+    else if (this.settings.axis === 'horizontal') {
       // Get the width of the text
       width = this.contents.textWidth();
 
@@ -9660,16 +9660,16 @@ class IframeView {
       if (this.settings.forceEvenPages) {
         columns = width / this.layout.pageWidth;
 
-        if (this.layout.divisor > 1 && this.layout.name === "reflowable" && columns % 2 > 0) {
+        if (this.layout.divisor > 1 && this.layout.name === 'reflowable' && columns % 2 > 0) {
           // add a blank page
           width += this.layout.pageWidth;
         }
       }
     } // Expand Vertically
-    else if (this.settings.axis === "vertical") {
+    else if (this.settings.axis === 'vertical') {
       height = this.contents.textHeight();
 
-      if (this.settings.flow === "paginated" && height % this.layout.height > 0) {
+      if (this.settings.flow === 'paginated' && height % this.layout.height > 0) {
         height = Math.ceil(height / this.layout.height) * this.layout.height;
       }
     } // Only Resize if dimensions have changed or
@@ -9687,14 +9687,14 @@ class IframeView {
     var size;
 
     if (Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(width)) {
-      this.element.style.width = width + "px";
-      this.iframe.style.width = width + "px";
+      this.element.style.width = width + 'px';
+      this.iframe.style.width = width + 'px';
       this._width = width;
     }
 
     if (Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["isNumber"])(height)) {
-      this.element.style.height = height + "px";
-      this.iframe.style.height = height + "px";
+      this.element.style.height = height + 'px';
+      this.iframe.style.height = height + 'px';
       this._height = height;
     }
 
@@ -9728,7 +9728,7 @@ class IframeView {
     var loaded = loading.promise;
 
     if (!this.iframe) {
-      loading.reject(new Error("No Iframe Available"));
+      loading.reject(new Error('No Iframe Available'));
       return loaded;
     }
 
@@ -9736,11 +9736,11 @@ class IframeView {
       this.onLoad(event, loading);
     }.bind(this);
 
-    if (this.settings.method === "blobUrl") {
-      this.blobUrl = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["createBlobUrl"])(contents, "application/xhtml+xml");
+    if (this.settings.method === 'blobUrl') {
+      this.blobUrl = Object(_utils_core__WEBPACK_IMPORTED_MODULE_1__["createBlobUrl"])(contents, 'application/xhtml+xml');
       this.iframe.src = this.blobUrl;
       this.element.appendChild(this.iframe);
-    } else if (this.settings.method === "srcdoc") {
+    } else if (this.settings.method === 'srcdoc') {
       this.iframe.srcdoc = contents;
       this.element.appendChild(this.iframe);
     } else {
@@ -9748,7 +9748,7 @@ class IframeView {
       this.document = this.iframe.contentDocument;
 
       if (!this.document) {
-        loading.reject(new Error("No Document Available"));
+        loading.reject(new Error('No Document Available'));
         return loaded;
       }
 
@@ -9777,12 +9777,12 @@ class IframeView {
     var link = this.document.querySelector("link[rel='canonical']");
 
     if (link) {
-      link.setAttribute("href", this.section.canonical);
+      link.setAttribute('href', this.section.canonical);
     } else {
-      link = this.document.createElement("link");
-      link.setAttribute("rel", "canonical");
-      link.setAttribute("href", this.section.canonical);
-      this.document.querySelector("head").appendChild(link);
+      link = this.document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      link.setAttribute('href', this.section.canonical);
+      this.document.querySelector('head').appendChild(link);
     }
 
     this.contents.on(_utils_constants__WEBPACK_IMPORTED_MODULE_4__[/* EVENTS */ "c"].CONTENTS.EXPAND, () => {
@@ -9818,10 +9818,10 @@ class IframeView {
   setAxis(axis) {
     this.settings.axis = axis;
 
-    if (axis == "horizontal") {
-      this.element.style.flex = "none";
+    if (axis == 'horizontal') {
+      this.element.style.flex = 'none';
     } else {
-      this.element.style.flex = "initial";
+      this.element.style.flex = 'initial';
     }
 
     this.size();
@@ -9858,12 +9858,12 @@ class IframeView {
   }
 
   show() {
-    this.element.style.visibility = "visible";
+    this.element.style.visibility = 'visible';
 
     if (this.iframe) {
-      this.iframe.style.visibility = "visible"; // Remind Safari to redraw the iframe
+      this.iframe.style.visibility = 'visible'; // Remind Safari to redraw the iframe
 
-      this.iframe.style.transform = "translateZ(0)";
+      this.iframe.style.transform = 'translateZ(0)';
       this.iframe.offsetWidth;
       this.iframe.style.transform = null;
     }
@@ -9873,8 +9873,8 @@ class IframeView {
 
   hide() {
     // this.iframe.style.display = "none";
-    this.element.style.visibility = "hidden";
-    this.iframe.style.visibility = "hidden";
+    this.element.style.visibility = 'hidden';
+    this.iframe.style.visibility = 'hidden';
     this.stopExpanding = true;
     this.emit(_utils_constants__WEBPACK_IMPORTED_MODULE_4__[/* EVENTS */ "c"].VIEWS.HIDDEN, this);
   }
@@ -9902,8 +9902,8 @@ class IframeView {
     var parentPos = this.iframe.getBoundingClientRect();
     var targetPos = this.contents.locationOf(target, this.settings.ignoreClass);
     return {
-      "left": targetPos.left,
-      "top": targetPos.top
+      left: targetPos.left,
+      top: targetPos.top
     };
   }
 
@@ -9921,15 +9921,15 @@ class IframeView {
     return this.elementBounds;
   }
 
-  highlight(cfiRange, data = {}, cb, className = "epubjs-hl", styles = {}) {
+  highlight(cfiRange, data = {}, cb, className = 'epubjs-hl', styles = {}) {
     if (!this.contents) {
       return;
     }
 
     const attributes = Object.assign({
-      "fill": "yellow",
-      "fill-opacity": "0.3",
-      "mix-blend-mode": "multiply"
+      fill: 'yellow',
+      'fill-opacity': '0.3',
+      'mix-blend-mode': 'multiply'
     }, styles);
     let range = this.contents.range(cfiRange);
 
@@ -9937,7 +9937,7 @@ class IframeView {
       this.emit(_utils_constants__WEBPACK_IMPORTED_MODULE_4__[/* EVENTS */ "c"].VIEWS.MARK_CLICKED, cfiRange, data);
     };
 
-    data["epubcfi"] = cfiRange;
+    data['epubcfi'] = cfiRange;
 
     if (!this.pane) {
       this.pane = new marks_pane__WEBPACK_IMPORTED_MODULE_5__["Pane"](this.iframe, this.element);
@@ -9946,31 +9946,35 @@ class IframeView {
     let m = new marks_pane__WEBPACK_IMPORTED_MODULE_5__["Highlight"](range, className, data, attributes);
     let h = this.pane.addMark(m);
     this.highlights[cfiRange] = {
-      "mark": h,
-      "element": h.element,
-      "listeners": [emitter, cb]
+      mark: h,
+      element: h.element,
+      listeners: [emitter, cb]
     };
-    h.element.setAttribute("ref", className);
-    h.element.addEventListener("click", emitter);
-    h.element.addEventListener("touchstart", emitter);
+    h.element.setAttribute('ref', className);
+    h.element.addEventListener('click', () => {
+      console.log('epubjs-highlight-click');
+      emitter();
+    }); // h.element.addEventListener('touchstart', () => {
+    //   console.log('epubjs-highlight-touchstart');
+    //   emitter();
+    // });
 
     if (cb) {
-      h.element.addEventListener("click", cb);
-      h.element.addEventListener("touchstart", cb);
+      h.element.addEventListener('click', cb); //   h.element.addEventListener('touchstart', cb);
     }
 
     return h;
   }
 
-  underline(cfiRange, data = {}, cb, className = "epubjs-ul", styles = {}) {
+  underline(cfiRange, data = {}, cb, className = 'epubjs-ul', styles = {}) {
     if (!this.contents) {
       return;
     }
 
     const attributes = Object.assign({
-      "stroke": "black",
-      "stroke-opacity": "0.3",
-      "mix-blend-mode": "multiply"
+      stroke: 'black',
+      'stroke-opacity': '0.3',
+      'mix-blend-mode': 'multiply'
     }, styles);
     let range = this.contents.range(cfiRange);
 
@@ -9978,7 +9982,7 @@ class IframeView {
       this.emit(_utils_constants__WEBPACK_IMPORTED_MODULE_4__[/* EVENTS */ "c"].VIEWS.MARK_CLICKED, cfiRange, data);
     };
 
-    data["epubcfi"] = cfiRange;
+    data['epubcfi'] = cfiRange;
 
     if (!this.pane) {
       this.pane = new marks_pane__WEBPACK_IMPORTED_MODULE_5__["Pane"](this.iframe, this.element);
@@ -9987,17 +9991,15 @@ class IframeView {
     let m = new marks_pane__WEBPACK_IMPORTED_MODULE_5__["Underline"](range, className, data, attributes);
     let h = this.pane.addMark(m);
     this.underlines[cfiRange] = {
-      "mark": h,
-      "element": h.element,
-      "listeners": [emitter, cb]
+      mark: h,
+      element: h.element,
+      listeners: [emitter, cb]
     };
-    h.element.setAttribute("ref", className);
-    h.element.addEventListener("click", emitter);
-    h.element.addEventListener("touchstart", emitter);
+    h.element.setAttribute('ref', className);
+    h.element.addEventListener('click', emitter); // h.element.addEventListener('touchstart', emitter);
 
     if (cb) {
-      h.element.addEventListener("click", cb);
-      h.element.addEventListener("touchstart", cb);
+      h.element.addEventListener('click', cb); //   h.element.addEventListener('touchstart', cb);
     }
 
     return h;
@@ -10035,10 +10037,10 @@ class IframeView {
       range.selectNodeContents(parent);
     }
 
-    let mark = this.document.createElement("a");
-    mark.setAttribute("ref", "epubjs-mk");
-    mark.style.position = "absolute";
-    mark.dataset["epubcfi"] = cfiRange;
+    let mark = this.document.createElement('a');
+    mark.setAttribute('ref', 'epubjs-mk');
+    mark.style.position = 'absolute';
+    mark.dataset['epubcfi'] = cfiRange;
 
     if (data) {
       Object.keys(data).forEach(key => {
@@ -10047,18 +10049,18 @@ class IframeView {
     }
 
     if (cb) {
-      mark.addEventListener("click", cb);
-      mark.addEventListener("touchstart", cb);
+      mark.addEventListener('click', cb);
+      mark.addEventListener('touchstart', cb);
     }
 
-    mark.addEventListener("click", emitter);
-    mark.addEventListener("touchstart", emitter);
+    mark.addEventListener('click', emitter);
+    mark.addEventListener('touchstart', emitter);
     this.placeMark(mark, range);
     this.element.appendChild(mark);
     this.marks[cfiRange] = {
-      "element": mark,
-      "range": range,
-      "listeners": [emitter, cb]
+      element: mark,
+      range: range,
+      listeners: [emitter, cb]
     };
     return parent;
   }
@@ -10066,7 +10068,7 @@ class IframeView {
   placeMark(element, range) {
     let top, right, left;
 
-    if (this.layout.name === "pre-paginated" || this.settings.axis !== "horizontal") {
+    if (this.layout.name === 'pre-paginated' || this.settings.axis !== 'horizontal') {
       let pos = range.getBoundingClientRect();
       top = pos.top;
       right = pos.right;
@@ -10099,11 +10101,9 @@ class IframeView {
       this.pane.removeMark(item.mark);
       item.listeners.forEach(l => {
         if (l) {
-          item.element.removeEventListener("click", l);
-          item.element.removeEventListener("touchstart", l);
+          item.element.removeEventListener('click', l);
+          item.element.removeEventListener('touchstart', l);
         }
-
-        ;
       });
       delete this.highlights[cfiRange];
     }
@@ -10117,11 +10117,9 @@ class IframeView {
       this.pane.removeMark(item.mark);
       item.listeners.forEach(l => {
         if (l) {
-          item.element.removeEventListener("click", l);
-          item.element.removeEventListener("touchstart", l);
+          item.element.removeEventListener('click', l);
+          item.element.removeEventListener('touchstart', l);
         }
-
-        ;
       });
       delete this.underlines[cfiRange];
     }
@@ -10135,11 +10133,9 @@ class IframeView {
       this.element.removeChild(item.element);
       item.listeners.forEach(l => {
         if (l) {
-          item.element.removeEventListener("click", l);
-          item.element.removeEventListener("touchstart", l);
+          item.element.removeEventListener('click', l);
+          item.element.removeEventListener('touchstart', l);
         }
-
-        ;
       });
       delete this.marks[cfiRange];
     }
